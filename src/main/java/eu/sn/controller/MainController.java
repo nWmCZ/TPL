@@ -7,7 +7,6 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import eu.sn.ack.ReasonCode;
 import eu.sn.ecp.ECPClient;
-import eu.sn.ecp.ECPContentBuilder;
 import eu.sn.model.Ack;
 import eu.sn.model.AckRepository;
 import eu.sn.model.Message;
@@ -27,8 +26,8 @@ public class MainController extends UI {
 
     FileDownloader fileDownloader;
 
-    @Autowired
-    ECPContentBuilder ecpContentBuilder;
+    //@Autowired
+    //ECPContentBuilder ecpContentBuilder;
 
     @Autowired
     ECPClient ecpClient;
@@ -147,14 +146,15 @@ public class MainController extends UI {
             public InputStream getStream() {
 
                 try {
-                    return new ByteArrayInputStream(ecpContentBuilder.createECPContent(ack));
+                    //TODO fix classpath problem in ECPConentBuilder.java
+                    return new ByteArrayInputStream(ack.toString().getBytes());
                 } catch (Exception e) {
                     e.printStackTrace();
                     return null;
                 }
 
             }
-        }, ack.getmRID() + ".xml");
+        }, ack.getmRID() + ".json");
     }
 
     private void updateGrid() {

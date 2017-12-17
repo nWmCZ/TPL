@@ -4,7 +4,6 @@ import eu.sn.model.Ack;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
-import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -12,14 +11,15 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+//@Service
 public class ECPContentBuilder {
 
     Configuration cfg = new Configuration(Configuration.VERSION_2_3_27);
 
 
     public ECPContentBuilder() throws Exception {
-        cfg.setDirectoryForTemplateLoading(new File("/Work/git-sources-idea/TPL/src/main/resources/templates"));
+        // TODO spring boot classpath not working
+        cfg.setDirectoryForTemplateLoading(new File(getClass().getClassLoader().getResource("templates").getFile()));
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);
