@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Acknowledgement_MarketDocument
+	xmlns="urn:iec62325.351:tc57wg16:451-1:acknowledgementdocument:7:0">
+	<mRID>70b31f0b-0eef-4</mRID>
+	<createdDateTime>2017-12-08T14:52:34Z</createdDateTime>
+
+	<sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A450</sender_MarketParticipant.mRID>
+	<sender_MarketParticipant.marketRole.type>A32</sender_MarketParticipant.marketRole.type>
+
+	<receiver_MarketParticipant.mRID codingScheme="A01">10X1001A1001A57U</receiver_MarketParticipant.mRID>
+	<receiver_MarketParticipant.marketRole.type>A07</receiver_MarketParticipant.marketRole.type>
+
+	<received_MarketDocument.mRID>22135740</received_MarketDocument.mRID>
+	<received_MarketDocument.revisionNumber>1</received_MarketDocument.revisionNumber>
+	
+	<received_MarketDocument.createdDateTime>2017-12-08T14:48:33Z</received_MarketDocument.createdDateTime>
+
+
+	<Reason>
+		<code>A02</code>
+	</Reason>
+	<Reason>
+		<code>999</code>
+		<text>Recognition failed - No Capacity Product Instance found. Possible reasons: Configuration does not exist / Allocation instance is cancelled / Capacity product is cancelled.
+Allocation type: A02
+Contract type: A01
+Delivery period: 2018-01-02T23:00:00.000Z/2018-01-03T23:00:00.000Z
+In area: 10YHR-HEP------M
+Out area: 10YCS-SERBIATSOV
+Class. Category: A04
+Class. Sequence: 1
+Currency: EUR</text>
+	</Reason>
+	<Reason>
+		<code>999</code>
+		<text>Recognition failed - No Data Item recognized in the document.
+Document name: /Data Flows/CASC/Publication Market Document/2017/12/8/22135740_v1.xml</text>
+	</Reason>
+
+
+</Acknowledgement_MarketDocument>

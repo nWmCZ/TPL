@@ -1,0 +1,82 @@
+configurations {
+	jaxb
+}
+
+buildscript {
+	ext {
+		springBootVersion = '2.0.0.M7'
+	}
+	repositories {
+		mavenCentral()
+		maven { url "https://repo.spring.io/snapshot" }
+		maven { url "https://repo.spring.io/milestone" }
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'eu.sn'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+	//maven { url "http://192.168.81.25/nexus/content/repositories/ecp-releases" }
+	maven { url "https://repo.spring.io/snapshot" }
+	maven { url "https://repo.spring.io/milestone" }
+}
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-devtools")
+	compile('org.springframework.boot:spring-boot-starter-actuator')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.freemarker:freemarker:2.3.27-incubating')
+
+	compile('wsdl4j:wsdl4j:1.6.3')
+
+	//ECP
+	/*
+	compile('org.apache.ws.commons.axiom:axiom:1.2.9')
+	compile('org.apache.ws.commons.axiom:axiom-api:1.2.9')
+	compile('org.apache.ws.commons.axiom:axiom-impl:1.2.9')
+	compile('org.apache.ws.commons.axiom:axiom-dom:1.2.9')
+	compile('org.apache.ws.commons.axiom:axiom-dom:1.2.9')
+
+	compile 'org.apache.commons:commons-io:1.3.2'
+	compile group: 'org.apache.woden', name: 'woden', version: '1.0M8'
+	compile group: 'org.apache.woden', name: 'woden-impl-dom', version: '1.0M8'
+	compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
+	compile group: 'org.apache.ws.commons.schema', name: 'XmlSchema', version: '1.4.7'
+	compile group: 'backport-util-concurrent', name: 'backport-util-concurrent-java12', version: '3.1'
+	compile group: 'org.apache.neethi', name: 'neethi', version: '2.0.2'
+	compile('org.apache.axis2:axis2:1.4.1')
+
+	compile('eu.entsoe.ecp:ecp-api:3.0.5.346')
+	*/
+
+	compile('com.vaadin:vaadin-bom:8.1.7')
+	compile('com.vaadin:vaadin-spring:2.0.1')
+	compile('com.vaadin:vaadin-client-compiled:8.1.7')
+	compile('com.vaadin:vaadin-themes:8.1.7')
+	compile('com.vaadin:vaadin-server:8.1.7')
+	compile('com.vaadin:vaadin-spring-boot:2.0.1')
+	compile('com.vaadin:vaadin-spring-boot-starter:2.0.1')
+
+	compile("org.springframework.ws:spring-ws-core")
+
+	runtime('com.h2database:h2')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	//compile(files(genJaxb.classesDir).builtBy(genJaxb))
+
+	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
+}
