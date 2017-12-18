@@ -13,4 +13,4 @@ ENV TIMEOUT=0
 
 COPY . /
 
-ENTRYPOINT ["sh", "-c", "sleep ${TIMEOUT} && java -jar ./build/libs/TPL-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["sh", "-c", "sleep ${TIMEOUT} && java -jar ./build/libs/*-0.0.1-SNAPSHOT.jar"]
