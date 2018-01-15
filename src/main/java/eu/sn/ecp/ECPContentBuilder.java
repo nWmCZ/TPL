@@ -1,51 +1,56 @@
 package eu.sn.ecp;
 
+import eu.sn.ack.ACKJAXB;
+import eu.sn.configuration.Configuration;
 import eu.sn.model.Ack;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateExceptionHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.StringWriter;
 import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
 
-//@Service
+@SuppressWarnings("unchecked")
+@Service
 public class ECPContentBuilder {
 
-    Configuration cfg = new Configuration(Configuration.VERSION_2_3_27);
-
-
-    public ECPContentBuilder() throws Exception {
-        // TODO spring boot classpath not working
-        cfg.setDirectoryForTemplateLoading(new File(getClass().getClassLoader().getResource("templates").getFile()));
-        cfg.setDefaultEncoding("UTF-8");
-        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        cfg.setLogTemplateExceptions(false);
-        cfg.setWrapUncheckedExceptions(true);
-    }
+    @Autowired
+    Configuration configuration;
 
     public byte[] createECPContent(Ack ack) throws Exception {
 
-        Map root = new HashMap();
-        root.put("mRID", ack.getmRID());
-        root.put("createdDateTime", ack.getCreatedDateTime());
-        root.put("marketDocumentMRID", ack.getMessage().getDocumentId());
-        root.put("marketDocumentVersion", ack.getMessage().getVersion());
-        root.put("marketDocumentCreatedDateTime", ack.getMessage().getCreatedDateTime());
-        root.put("reason", ack.getReasonCode());
+        ACKJAXB ackjaxb = new ACKJAXB();
+
+        ackjaxb.setmRID(ack.getmRID());
+        ackjaxb.setCreatedDateTime(ack.getCreatedDateTime().toString().substring(0,19).concat("Z"));
+        ackjaxb.setReceiver(ack.getMessage().getSenderMarketParticipant());
+        ackjaxb.setReceiverType(ack.getMessage().getSenderMarketParticipantType());
+        ackjaxb.setSender(ack.getMessage().getReceiverMarketParticipant());
+        ackjaxb.setSenderType(ack.getMessage().getReceiverMarketParticipantType());
+        ackjaxb.setReceivedMRID(ack.getMessage().getDocumentId());
+        ackjaxb.setReceivedVersion(ack.getMessage().getVersion());
+        ackjaxb.setReceivedCreatedDateTime(ack.getMessage().getCreatedDateTime().toString().substring(0,19).concat("Z"));
+        ackjaxb.setReasonCode(ack.getReasonCode().toString());
 
         if (ack.getReasonText() != null) {
-            root.put("reasonText", ack.getReasonText());
+            ackjaxb.setReasonText(ack.getReasonText());
         }
 
-        /* Get the template (uses cache internally) */
-        Template temp = cfg.getTemplate("ack.ftl");
-
-        /* Merge data-model with template */
         Writer out = new StringWriter();
-        temp.process(root, out);
+
+        try {
+            File file = new File(configuration.getOutAckDir());
+            JAXBContext jaxbContext = JAXBContext.newInstance(ACKJAXB.class);
+            Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+            jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            jaxbMarshaller.marshal(ackjaxb, out);
+            jaxbMarshaller.marshal(ackjaxb, System.out);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
 
         return out.toString().getBytes("UTF-8");
     }

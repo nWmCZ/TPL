@@ -9,8 +9,8 @@ public class AckBuilder {
 
     public static Ack createAck(Message message, ReasonCode reasonCode, String reasonText) {
         Ack ack = new Ack();
-        StringBuilder mrid = new StringBuilder("ACK_");
-        mrid.append(reasonCode.toString()).append("_").append(message.getDocumentId());
+        StringBuilder mrid = new StringBuilder("ACK-");
+        mrid.append(reasonCode.toString()).append("-").append(message.getDocumentId());
         ack.setmRID(mrid.toString());
         ack.setCreatedDateTime(LocalDateTime.now());
         ack.setMessage(message);

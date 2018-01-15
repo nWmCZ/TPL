@@ -4,11 +4,11 @@
     <mRID>${mRID}</mRID>
     <createdDateTime>${createdDateTime}</createdDateTime>
 
-    <sender_MarketParticipant.mRID codingScheme="A01">10X1001A1001A450</sender_MarketParticipant.mRID>
-    <sender_MarketParticipant.marketRole.type>A32</sender_MarketParticipant.marketRole.type>
+    <sender_MarketParticipant.mRID codingScheme="A01">${receiverMarketParticipant}</sender_MarketParticipant.mRID>
+    <sender_MarketParticipant.marketRole.type>${receiverMarketParticipantType}</sender_MarketParticipant.marketRole.type>
 
-    <receiver_MarketParticipant.mRID codingScheme="A01">10X1001A1001A57U</receiver_MarketParticipant.mRID>
-    <receiver_MarketParticipant.marketRole.type>A07</receiver_MarketParticipant.marketRole.type>
+    <receiver_MarketParticipant.mRID codingScheme="A01">${senderMarketParticipant}</receiver_MarketParticipant.mRID>
+    <receiver_MarketParticipant.marketRole.type>${senderMarketParticipantType}</receiver_MarketParticipant.marketRole.type>
 
     <received_MarketDocument.mRID>${marketDocumentMRID}</received_MarketDocument.mRID>
     <received_MarketDocument.revisionNumber>${marketDocumentVersion}</received_MarketDocument.revisionNumber>

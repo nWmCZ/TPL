@@ -11,6 +11,8 @@ LABEL   org.label-schema.build-date=$BUILD_DATE \
 
 ENV TIMEOUT=0
 
+EXPOSE 8080
+
 COPY . /
 
-ENTRYPOINT ["sh", "-c", "sleep ${TIMEOUT} && java -jar ./build/libs/*-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["sh", "-c", "sleep ${TIMEOUT} && java -jar ./build/libs/*.jar --spring.config.location=/tpl/"]

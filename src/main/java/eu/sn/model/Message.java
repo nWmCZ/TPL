@@ -16,6 +16,10 @@ public class Message {
     private LocalDateTime createdDateTime;
     @OneToOne
     private Ack ack;
+    private String senderMarketParticipant;
+    private String senderMarketParticipantType;
+    private String receiverMarketParticipant;
+    private String receiverMarketParticipantType;
 
     public Long getId() {
         return id;
@@ -57,13 +61,39 @@ public class Message {
         this.ack = ack;
     }
 
-    public Message() {
+    public String getSenderMarketParticipant() {
+        return senderMarketParticipant;
     }
 
-    public Message(String documentId, int version, LocalDateTime createdDateTime) {
-        this.documentId = documentId;
-        this.version = version;
-        this.createdDateTime = createdDateTime;
+    public void setSenderMarketParticipant(String senderMarketParticipant) {
+        this.senderMarketParticipant = senderMarketParticipant;
+    }
+
+    public String getSenderMarketParticipantType() {
+        return senderMarketParticipantType;
+    }
+
+    public void setSenderMarketParticipantType(String senderMarketParticipantType) {
+        this.senderMarketParticipantType = senderMarketParticipantType;
+    }
+
+    public String getReceiverMarketParticipant() {
+        return receiverMarketParticipant;
+    }
+
+    public void setReceiverMarketParticipant(String receiverMarketParticipant) {
+        this.receiverMarketParticipant = receiverMarketParticipant;
+    }
+
+    public String getReceiverMarketParticipantType() {
+        return receiverMarketParticipantType;
+    }
+
+    public void setReceiverMarketParticipantType(String receiverMarketParticipantType) {
+        this.receiverMarketParticipantType = receiverMarketParticipantType;
+    }
+
+    public Message() {
     }
 
     @Override
@@ -74,6 +104,10 @@ public class Message {
                 ", version=" + version +
                 ", createdDateTime=" + createdDateTime +
                 ", ack=" + ack +
+                ", senderMarketParticipant='" + senderMarketParticipant + '\'' +
+                ", senderMarketParticipantType='" + senderMarketParticipantType + '\'' +
+                ", receiverMarketParticipant='" + receiverMarketParticipant + '\'' +
+                ", receiverMarketParticipantType='" + receiverMarketParticipantType + '\'' +
                 '}';
     }
 }

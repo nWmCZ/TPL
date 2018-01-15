@@ -1,7 +1,5 @@
 # The TPL project
 
-- docker pull mysql
-
 ## Requirements
 - Git
 - Gradle
@@ -16,6 +14,14 @@
 
 ## Run JAR
 - java -jar /opt/TPL/build/libs/TPL-0.0.1-SNAPSHOT.jar
+
+## Edit your application properties
+- fssf.inDir = for ECP fssf channel
+- fssf.outDir = for ECP fssf channel
+- fssf.outAckDir = for storing outgoing ACKs
+
+## Run docker container
+- docker run -d -p 8080:8080 -v /root/work/tpl/application.properties:/tpl/application.properties novst/tpl
 
 ## Labeling
 - http://label-schema.org/rc1/
