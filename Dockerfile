@@ -15,4 +15,6 @@ EXPOSE 8080
 
 COPY . /
 
+RUN ./gradlew clean build
+
 ENTRYPOINT ["sh", "-c", "sleep ${TIMEOUT} && java -jar ./build/libs/*.jar --spring.config.location=/tpl/"]
