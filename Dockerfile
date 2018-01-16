@@ -1,4 +1,4 @@
-FROM openjdk:jre-alpine
+FROM openjdk:jdk-alpine
 
 ARG BUILD_DATE
 
